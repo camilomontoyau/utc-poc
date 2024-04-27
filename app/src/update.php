@@ -10,32 +10,23 @@ $id = $_GET['id'];
 $user = new User();
 
 // Get the user data from the database
-$userData = $user->getUserById($id);
+$user = $user->read($id);
 
 // Check if the user exists
-if ($userData) {
+if ($user !== null) {
     // Display the user data in a form for updating
     echo '<h1>Update User</h1>';
     echo '<form method="POST" action="update.php">';
-    echo '<input type="hidden" name="id" value="' . $userData['id'] . '">';
-    echo 'Name: <input type="text" name="name" value="' . $userData['name'] . '"><br>';
-    echo 'Email: <input type="email" name="email" value="' . $userData['email'] . '"><br>';
-    echo 'Password: <input type="password" name="password"><br>';
+    echo '<input type="hidden" name="id" value="' . $user->getId() . '">';
+    echo 'Name: <input type="text" name="name" value="' . $user->getName() . '"><br>';
     echo '<input type="submit" value="Update">';
     echo '</form>';
 
     // Check if the form is submitted
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Get the updated user data from the form
-        $updatedUserData = [
-            'id' => $_POST['id'],
-            'name' => $_POST['name'],
-            'email' => $_POST['email'],
-            'password' => $_POST['password'],
-        ];
-
-        // Update the user data in the database
-        $user->updateUser($updatedUserData);
+        $user->setName($_POST['name']);
+        $user->update();
 
         // Redirect to the read.php page to view the updated user data
         header('Location: read.php');
