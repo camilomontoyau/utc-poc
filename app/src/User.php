@@ -55,16 +55,35 @@ class User {
       $statement->bind_param("sss", $this->name, $this->created_at, $this->updated_at);
       // Execute the query
       $statement->execute();
-      // Set the id of the newly created user
-      $this->id = $statement->insert_id;
 
-      $createdUser = $this->read($this->id);
+      if ($statement->error) {
+        // Handle the case where there was an error with the query
+        // For example, you could throw an exception
+        throw new Exception($statement->error);
+      }
 
-      // Close the statement and connection
-      $statement->close();
-      $connection->close();
+      if ($statement->affected_rows === 0) {
+        // Handle the case where no rows were affected by the query
+        // For example, you could throw an exception
+        throw new Exception("No rows were affected by the query.");
+      }
 
-      return $createdUser;
+      if ($statement->affected_rows === -1) {
+        // Handle the case where the query failed
+        // For example, you could throw an exception
+        throw new Exception("The query failed.");
+      }
+
+      if ($statement->affected_rows === 1) {
+        // Handle the case where the query was successful
+        // For example, you could return the newly created user
+        // Get the id of the newly created user
+        $this->id = $statement->insert_id;
+        // Close the statement and connection
+        $statement->close();
+        $connection->close();
+        return $this;
+      }
     }
 
     public function readAll() {
@@ -110,10 +129,16 @@ class User {
         $result = $statement->get_result();
         $user = $result->fetch_assoc();
 
-        $this->id = $user['id'];
-        $this->name = $user['name'];
-        $this->created_at = $user['created_at'];
-        $this->updated_at = $user['updated_at'];
+        if ($user) {
+          $this->id = $user['id'];
+          $this->name = $user['name'];
+          $this->created_at = $user['created_at'];
+          $this->updated_at = $user['updated_at'];
+        } else {
+          // Handle the case where no user was found
+          // For example, you could throw an exception
+          throw new Exception("No user found with id $id");
+        }
 
         // Close the statement and connection
         $statement->close();

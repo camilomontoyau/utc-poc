@@ -2,6 +2,7 @@
 
 require_once 'User.php';
 require_once 'Database.php';
+require_once 'utils/handle-client-date.php';
 
 // Check if the form is submitted
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -15,8 +16,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($jsonData) {
       // Get the username from the JSON data
       $name = $jsonData['name'];
-      $created_at = $jsonData['created_at'];
-      $updated_at = $jsonData['updated_at'];
+      $created_at = handleClientDate($jsonData['created_at']);
+      $updated_at = handleClientDate($jsonData['updated_at']);
+
       
       $user = new User();
     
