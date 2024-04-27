@@ -3,6 +3,7 @@
 require_once 'User.php';
 require_once 'Database.php';
 require_once 'utils/handle-client-date.php';
+require_once 'utils/transform-to-js-date.php';
 
 // Check if the form is submitted
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -37,7 +38,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Set the response content type
         header('Content-Type: application/json');
         // Convert the user object to JSON
-        $userJson = json_encode($user->getData());
+        $userJson = json_encode([
+          'id' => $user->getId(),
+          'name' => $user->getName(),
+          'created_at' => transformToJsDate($user->getCreatedAt()),
+          'updated_at' => transformToJsDate($user->getUpdatedAt())
+        ]);
         // Output the JSON response
         echo $userJson;
       } else {
