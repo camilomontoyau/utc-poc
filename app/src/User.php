@@ -19,19 +19,15 @@ class User {
         return $this->name;
     }
 
-    public function getEmail() {
-        return $this->email;
-    }
-
     public function create() {
         // Connect to the database
         $db = new Database();
         $connection = $db->connect();
 
         // Prepare the query
-        $query = "INSERT INTO users (name, email) VALUES (?, ?)";
+        $query = "INSERT INTO users (name) VALUES (?)";
         $statement = $connection->prepare($query);
-        $statement->bind_param("ss", $this->name, $this->email);
+        $statement->bind_param("s", $this->name);
 
         // Execute the query
         $statement->execute();
