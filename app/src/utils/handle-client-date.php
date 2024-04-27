@@ -9,9 +9,9 @@ function handleClientDate($dateString) {
     $dateString_ = rtrim($dateString, 'Z');
 
     // If not, try to convert it from ISO 8601 format
-    if (DateTime::createFromFormat(DateTime::ISO8601, $dateString_)) {
-        $dateTime_ = new DateTime($dateString);
-        return $dateTime_->format('Y-m-d H:i:s');
+    if (DateTime::createFromFormat('Y-m-d\TH:i:s.u', $dateString_)) {
+        $dateTime = new DateTime($dateString_);
+        return $dateTime->format('Y-m-d H:i:s');
     }
 
     // If it's not possible to convert the string to a valid date, throw an exception
