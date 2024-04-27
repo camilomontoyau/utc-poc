@@ -21,6 +21,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $users = $user->readAll();
     foreach ($users as $user) {
         echo "Name: {$user['name']}<br>";
+        echo "created_at: {$user['created_at']}<br>";
+        echo "updated_at: {$user['updated_at']}<br>";
+        $createdAt = new DateTime($user['created_at'], new DateTimeZone('UTC'));
+        $createdAt->setTimezone(new DateTimeZone('America/New_York'));
+        echo "<script>const date = new Date('{$createdAt->format('Y-m-d H:i:s')}'); console.log(date);</script>";
+        echo "<script>document.getElementById</script>";
     }
 } elseif ($_SERVER['REQUEST_METHOD'] === 'PUT') {
     // Update user data
@@ -38,3 +44,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 } else {
     echo 'Invalid request method!';
 }
+?>
+
+<div id="app"></div>
