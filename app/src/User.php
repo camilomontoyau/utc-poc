@@ -50,7 +50,7 @@ class User {
       $connection = $db->connect();
 
       // Prepare the query
-      $query = "INSERT INTO users (name) VALUES (?)";
+      $query = "INSERT INTO users (name, create_at, updated_at) VALUES (?, ?, ?)";
       $statement = $connection->prepare($query);
       $statement->bind_param("s", $this->name);
       // Execute the query

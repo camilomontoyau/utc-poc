@@ -15,11 +15,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($jsonData) {
       // Get the username from the JSON data
       $name = $jsonData['username'];
+      $created_at = $jsonData['created_at'];
+      $updated_at = $jsonData['updated_at'];
       
       $user = new User();
     
       // Set the user data
       $user->setName($name);
+      $user->setCreatedAt($created_at);
+      $user->setUpdatedAt($updated_at);
     
       // Create the user
       $user = $user->create();
