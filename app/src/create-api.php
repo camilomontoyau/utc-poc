@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
       // Create the user
       $user = $user->create();
-      
+
       // Check if the user creation was successful
       if ($user) {
         // Set the response status code
@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Set the response content type
         header('Content-Type: application/json');
         // Convert the user object to JSON
-        $userJson = json_encode($user);
+        $userJson = json_encode($user->getData());
         // Output the JSON response
         echo $userJson;
       } else {

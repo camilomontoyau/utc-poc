@@ -19,6 +19,23 @@ class User {
         $this->name = $name;
     }
 
+    public function getCreatedAt() {
+        return $this->created_at;
+    }
+
+    public function getUpdatedAt() {
+        return $this->updated_at;
+    }
+
+    public function getData() {
+        return [
+            'id' => $this->id,
+            'name' => $this->name,
+            'created_at' => $this->created_at,
+            'updated_at' => $this->updated_at
+        ];
+    }
+
     public function create() {
       // Connect to the database
       $db = new Database();
