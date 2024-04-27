@@ -6,7 +6,7 @@ require_once 'Database.php';
 // Check if the form is submitted
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Get the form data
-    $name = $_POST['name'];
+    $name = $_POST['username'];
     
     $user = new User();
 
