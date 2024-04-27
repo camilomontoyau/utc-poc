@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       // Set the response content type
       header('Content-Type: application/json');
       // Convert the user object to JSON
-      $userJson = json_encode($user);
+      $userJson = json_encode($user)  ;
       // Output the JSON response
       echo $userJson;
     } else {
