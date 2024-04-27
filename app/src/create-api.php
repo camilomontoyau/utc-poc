@@ -34,20 +34,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
     
 }
-
-?>
-
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Create User</title>
-</head>
-<body>
-    <h1>Create User</h1>
-    <form method="POST" action="create.php">
-        <label for="name">Name:</label>
-        <input type="text" name="name" id="name" required><br><br>
-        <input type="submit" value="Create">
-    </form>
-</body>
-</html>
