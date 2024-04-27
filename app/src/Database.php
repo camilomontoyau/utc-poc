@@ -16,6 +16,7 @@ class Database {
         if (!$this->connection) {
             die("Connection failed: " . mysqli_connect_error());
         }
+        return $this->connection;
     }
 
     public function query($sql) {

@@ -6,17 +6,17 @@ class User {
     private $created_at;
     private $updated_at;
 
-    public function __construct($id, $name) {
-        $this->id = $id;
-        $this->name = $name;
-    }
-
+    
     public function getId() {
         return $this->id;
     }
 
     public function getName() {
         return $this->name;
+    }
+
+    public function setName($name) {
+        $this->name = $name;
     }
 
     public function create() {
@@ -35,6 +35,32 @@ class User {
         // Close the statement and connection
         $statement->close();
         $connection->close();
+    }
+
+    public function readAll() {
+        // Connect to the database
+        $db = new Database();
+        $connection = $db->connect();
+
+        // Prepare the query
+        $query = "SELECT * FROM users";
+        $statement = $connection->prepare($query);
+
+        // Execute the query
+        $statement->execute();
+
+        // Fetch the result
+        $result = $statement->get_result();
+        $users = [];
+        while ($user = $result->fetch_assoc()) {
+            $users[] = $user;
+        }
+
+        // Close the statement and connection
+        $statement->close();
+        $connection->close();
+
+        return $users;
     }
 
     public function read($id) {
@@ -67,9 +93,9 @@ class User {
         $connection = $db->connect();
 
         // Prepare the query
-        $query = "UPDATE users SET name = ?, email = ? WHERE id = ?";
+        $query = "UPDATE users SET name = ? WHERE id = ?";
         $statement = $connection->prepare($query);
-        $statement->bind_param("ssi", $this->name, $this->email, $this->id);
+        $statement->bind_param("si", $this->name, $this->id);
 
         // Execute the query
         $statement->execute();
