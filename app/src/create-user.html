@@ -28,11 +28,28 @@
           }),
           contentType: 'application/json',
           success: function(response) {
-        console.log(response);
-        alert('User created successfully');
+            // response sample
+            //             {
+            //     "id": 2,
+            //     "name": "masachussets2",
+            //     "created_at": "2024-04-27T21:21:03.000000Z",
+            //     "updated_at": "2024-04-27T21:21:03.000000Z"
+            // }
+
+            $('#name').val('');
+            $('#response').html('');
+            $('#response').append('<p>User created successfully</p>');
+            $('#response').append('<p>Id: ' + response.id + '</p>');
+            $('#response').append('<p>Name: ' + response.name + '</p>');
+            $('#response').append('<p>Created At: ' + new Date(response.created_at) + '</p>');
+            $('#response').append('<p>Updated At: ' + new Date(response.updated_at) + '</p>');
+            
+            alert('User created successfully');
           },
           error: function(error) {
-        alert('Error creating user');
+            $('#response').html('');
+            console.log(error);
+            alert('Error creating user');
           }
         });
       });
