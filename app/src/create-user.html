@@ -21,13 +21,14 @@
         $.ajax({
           url: '/create-api.php',
           type: 'POST',
-          data: { username },
+          data: JSON.stringify({ username }),
+          contentType: 'application/json',
           success: function(response) {
-            console.log(response);
-            alert('User created successfully');
+        console.log(response);
+        alert('User created successfully');
           },
           error: function(error) {
-            alert('Error creating user');
+        alert('Error creating user');
           }
         });
       });
