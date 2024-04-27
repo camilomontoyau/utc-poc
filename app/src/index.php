@@ -23,7 +23,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 } elseif ($_SERVER['REQUEST_METHOD'] === 'PUT') {
     // Update user data
     parse_str(file_get_contents("php://input"), $data);
-    $user->update($data['id'], $data['name']);
+    $user = new User();
+    $user = $user->read($data['id']);
+    $user->setName($data['name']);
+    $user->update();
     echo 'User updated successfully!';
 } elseif ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
     // Delete a user

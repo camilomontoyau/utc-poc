@@ -80,11 +80,16 @@ class User {
         $result = $statement->get_result();
         $user = $result->fetch_assoc();
 
+        $this->id = $user['id'];
+        $this->name = $user['name'];
+        $this->created_at = $user['created_at'];
+        $this->updated_at = $user['updated_at'];
+
         // Close the statement and connection
         $statement->close();
         $connection->close();
 
-        return $user;
+        return $this;
     }
 
     public function update() {
@@ -105,7 +110,7 @@ class User {
         $connection->close();
     }
 
-    public function delete() {
+    public function delete($id) {
         // Connect to the database
         $db = new Database();
         $connection = $db->connect();
@@ -113,7 +118,7 @@ class User {
         // Prepare the query
         $query = "DELETE FROM users WHERE id = ?";
         $statement = $connection->prepare($query);
-        $statement->bind_param("i", $this->id);
+        $statement->bind_param("i", $id);
 
         // Execute the query
         $statement->execute();
