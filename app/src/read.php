@@ -7,11 +7,9 @@ require_once 'Database.php';
 $user = new User();
 
 // Connect to the database
-$database = new Database();
-$connection = $database->connect();
 
 // Retrieve all users
-$users = $user->getAllUsers($connection);
+$users = $user->readAll();
 
 // Display the user data
 foreach ($users as $user) {
@@ -20,8 +18,3 @@ foreach ($users as $user) {
     echo "Email: " . $user['email'] . "<br>";
     echo "<br>";
 }
-
-// Close the database connection
-$database->closeConnection();
-
-?>
