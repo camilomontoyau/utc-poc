@@ -28,6 +28,16 @@ class User {
         $query = "INSERT INTO users (name) VALUES (?)";
         $statement = $connection->prepare($query);
         $statement->bind_param("s", $this->name);
+        // Execute the query
+        $statement->execute();
+        // Set the id of the newly created user
+        $this->id = $statement->insert_id;
+
+        $createdUser = $this->read($this->id);
+
+        // Close the statement and connection
+        $statement->close();
+        $connection->close();
 
         // Execute the query
         $statement->execute();
@@ -35,6 +45,8 @@ class User {
         // Close the statement and connection
         $statement->close();
         $connection->close();
+
+        return $createdUser;
     }
 
     public function readAll() {
