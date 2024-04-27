@@ -52,7 +52,7 @@ class User {
       // Prepare the query
       $query = "INSERT INTO users (name, create_at, updated_at) VALUES (?, ?, ?)";
       $statement = $connection->prepare($query);
-      $statement->bind_param("s", $this->name);
+      $statement->bind_param("sss", $this->name, $this->created_at, $this->updated_at);
       // Execute the query
       $statement->execute();
       // Set the id of the newly created user
