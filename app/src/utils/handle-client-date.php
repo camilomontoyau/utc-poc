@@ -5,8 +5,11 @@ function handleClientDate($dateString) {
         return $dateString;
     }
 
+    // Remove the 'Z' at the end of the string if it exists
+    $dateString = rtrim($dateString, 'Z');
+
     // If not, try to convert it from ISO 8601 format
-    if (DateTime::createFromFormat(DateTime::ATOM, $dateString)) {
+    if (DateTime::createFromFormat(DateTime::ISO8601, $dateString)) {
         $dateTime = new DateTime($dateString);
         return $dateTime->format('Y-m-d H:i:s');
     }
