@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Check if the JSON decoding was successful
     if ($jsonData) {
       // Get the username from the JSON data
-      $name = $jsonData['username'];
+      $name = $jsonData['user'];
       $created_at = $jsonData['created_at'];
       $updated_at = $jsonData['updated_at'];
       
