@@ -20,33 +20,26 @@ class User {
     }
 
     public function create() {
-        // Connect to the database
-        $db = new Database();
-        $connection = $db->connect();
+      // Connect to the database
+      $db = new Database();
+      $connection = $db->connect();
 
-        // Prepare the query
-        $query = "INSERT INTO users (name) VALUES (?)";
-        $statement = $connection->prepare($query);
-        $statement->bind_param("s", $this->name);
-        // Execute the query
-        $statement->execute();
-        // Set the id of the newly created user
-        $this->id = $statement->insert_id;
+      // Prepare the query
+      $query = "INSERT INTO users (name) VALUES (?)";
+      $statement = $connection->prepare($query);
+      $statement->bind_param("s", $this->name);
+      // Execute the query
+      $statement->execute();
+      // Set the id of the newly created user
+      $this->id = $statement->insert_id;
 
-        $createdUser = $this->read($this->id);
+      $createdUser = $this->read($this->id);
 
-        // Close the statement and connection
-        $statement->close();
-        $connection->close();
+      // Close the statement and connection
+      $statement->close();
+      $connection->close();
 
-        // Execute the query
-        $statement->execute();
-
-        // Close the statement and connection
-        $statement->close();
-        $connection->close();
-
-        return $createdUser;
+      return $createdUser;
     }
 
     public function readAll() {
