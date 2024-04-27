@@ -14,6 +14,7 @@ services:
       MYSQL_DATABASE: test
       MYSQL_USER: test
       MYSQL_PASSWORD: test
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
     volumes:
       - ./db/:/docker-entrypoint-initdb.d/
     ports:
