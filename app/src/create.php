@@ -12,6 +12,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Set the user data
     $user->setName($name);
+
+    // Create the user
+    $user->create();
     
     // Redirect to the index page
     header('Location: index.php');

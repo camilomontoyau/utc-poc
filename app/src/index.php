@@ -15,6 +15,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     echo 'User created successfully!';
 } elseif ($_SERVER['REQUEST_METHOD'] === 'GET') {
+    echo "<a href='create.php'>Create User</a><br><br>";
+    
     // Retrieve user data
     $users = $user->readAll();
     foreach ($users as $user) {
