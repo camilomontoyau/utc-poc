@@ -12,6 +12,7 @@
     <br>
     <input type="submit" value="Create User">
   </form>
+  <div id="response"></div>
   <script>
     $(document).ready(function() {
       $('#form').submit(function(event) {
@@ -22,6 +23,7 @@
           type: 'POST',
           data: { username },
           success: function(response) {
+            console.log(response);
             alert('User created successfully');
           },
           error: function(error) {
